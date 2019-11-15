@@ -161,10 +161,8 @@ static UIReturnKeyType ToUIReturnKeyType(NSString* inputType) {
  
  Reference to  github.com/flutter/flutter/issues/33040
  **/
-#if __IPHONE_OS_VERSION_MAX_ALLOWED >= __IPHONE_10_0
+if(@available(10.0,0))
 @property(nonatomic) UITextContentType textContentType;
-#else
-#endif
 
 
 // UITextInputTraits
@@ -173,7 +171,7 @@ static UIReturnKeyType ToUIReturnKeyType(NSString* inputType) {
 @property(nonatomic) UITextSpellCheckingType spellCheckingType;
 @property(nonatomic) BOOL enablesReturnKeyAutomatically;
 @property(nonatomic) UIKeyboardAppearance keyboardAppearance;
-@property(nonatomic) UIKeyboardType keyboardType;
+@property(nonatomic) UIKeyboardType keyboardType
 @property(nonatomic) UIReturnKeyType returnKeyType;
 @property(nonatomic, getter=isSecureTextEntry) BOOL secureTextEntry;
 
@@ -208,6 +206,7 @@ static UIReturnKeyType ToUIReturnKeyType(NSString* inputType) {
     _enablesReturnKeyAutomatically = NO;
     _keyboardAppearance = UIKeyboardAppearanceDefault;
     _keyboardType = UIKeyboardTypeDefault;
+    if(@available iOS (10.0,*))
     _keyboardContentType = UITextContentType;
     _returnKeyType = UIReturnKeyDone;
     _secureTextEntry = NO;
@@ -772,7 +771,8 @@ static UIReturnKeyType ToUIReturnKeyType(NSString* inputType) {
 
 - (void)setTextInputClient:(int)client withConfiguration:(NSDictionary*)configuration {
   NSDictionary* inputType = configuration[@"inputType"];
-    NSDictionary* contentType = configuration[@"contentType"];
+  if(@available iOS (10.0,*))
+  NSDictionary* contentType = configuration[@"contentType"];
   NSString* keyboardAppearance = configuration[@"keyboardAppearance"];
   if ([configuration[@"obscureText"] boolValue]) {
     _activeView = _secureView;
@@ -781,6 +781,7 @@ static UIReturnKeyType ToUIReturnKeyType(NSString* inputType) {
   }
 
   _activeView.keyboardType = ToUIKeyboardType(inputType);
+  if(@available iOS (10.0,*))
   _activeView.textContentType = ToUITextContentType(contentType);
   _activeView.returnKeyType = ToUIReturnKeyType(configuration[@"inputAction"]);
   _activeView.autocapitalizationType = ToUITextAutoCapitalizationType(configuration);
