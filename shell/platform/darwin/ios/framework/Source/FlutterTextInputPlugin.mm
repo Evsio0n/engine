@@ -171,7 +171,7 @@ if(@available(10.0,0))
 @property(nonatomic) UITextSpellCheckingType spellCheckingType;
 @property(nonatomic) BOOL enablesReturnKeyAutomatically;
 @property(nonatomic) UIKeyboardAppearance keyboardAppearance;
-@property(nonatomic) UIKeyboardType keyboardType
+@property(nonatomic) UIKeyboardType keyboardType;
 @property(nonatomic) UIReturnKeyType returnKeyType;
 @property(nonatomic, getter=isSecureTextEntry) BOOL secureTextEntry;
 
