@@ -207,7 +207,7 @@ if(@available(10.0,0))
     _keyboardAppearance = UIKeyboardAppearanceDefault;
     _keyboardType = UIKeyboardTypeDefault;
     if(@available iOS (10.0,*))
-    _keyboardContentType = UITextContentType;
+        _keyboardContentType = UITextContentType;
     _returnKeyType = UIReturnKeyDone;
     _secureTextEntry = NO;
   }
@@ -772,7 +772,7 @@ if(@available(10.0,0))
 - (void)setTextInputClient:(int)client withConfiguration:(NSDictionary*)configuration {
   NSDictionary* inputType = configuration[@"inputType"];
   if(@available iOS (10.0,*))
-  NSDictionary* contentType = configuration[@"contentType"];
+      NSDictionary* contentType = configuration[@"contentType"];
   NSString* keyboardAppearance = configuration[@"keyboardAppearance"];
   if ([configuration[@"obscureText"] boolValue]) {
     _activeView = _secureView;
@@ -782,7 +782,7 @@ if(@available(10.0,0))
 
   _activeView.keyboardType = ToUIKeyboardType(inputType);
   if(@available iOS (10.0,*))
-  _activeView.textContentType = ToUITextContentType(contentType);
+      _activeView.textContentType = ToUITextContentType(contentType);
   _activeView.returnKeyType = ToUIReturnKeyType(configuration[@"inputAction"]);
   _activeView.autocapitalizationType = ToUITextAutoCapitalizationType(configuration);
   if ([keyboardAppearance isEqualToString:@"Brightness.dark"]) {
